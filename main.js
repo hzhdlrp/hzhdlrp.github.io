@@ -1,5 +1,6 @@
 import { Player } from './player.js';
 import { Money } from './money.js';
+import { Energy } from './energy.js';
 
 let progress = {
     score: 0,
@@ -56,6 +57,7 @@ window.addEventListener('load', function() {
         constructor() {
             this.player = new Player(canvas);
             this.money = new Money(canvas2);
+            this.energy = new Energy(canvas3);
         }
         update() {
             this.player.update();
@@ -64,6 +66,7 @@ window.addEventListener('load', function() {
         draw() {
             this.money.draw(ctx2, progress.score);
             this.player.draw(ctx);
+            this.energy.draw(ctx3, progress.energy);
         }
     }
 
@@ -75,6 +78,7 @@ window.addEventListener('load', function() {
         for (let i = 0; i < 2; i++) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+            ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
             game.update();
             game.draw();
         
@@ -84,6 +88,7 @@ window.addEventListener('load', function() {
         for (let i = 0; i < 2; i++) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+            ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
             game.update();
             game.update();
             game.draw();
@@ -92,6 +97,16 @@ window.addEventListener('load', function() {
         }
         
     }
+
+    setInterval(() => {
+        if (progress.energy < 1000) {
+            progress.energy++;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+            ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
+            game.draw();
+        }
+    }, 1000);
     
    
 
@@ -105,7 +120,3 @@ window.buttonClicked = function buttonClicked() {
     animate();
 }
 
-
-setInterval(() => {
-    progress.energy++;
-}, 1000);
