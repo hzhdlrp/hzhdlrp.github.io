@@ -121,9 +121,9 @@ window.addEventListener('load', function() {
 });
 
 window.buttonClicked = function buttonClicked() {
-    if (progress.energy > 0) {
+    if (progress.energy > 2) {
         progress.score++;
-        progress.energy--;
+        progress.energy-=3;
         saveProgress();
         console.log('tap');
         animate();
