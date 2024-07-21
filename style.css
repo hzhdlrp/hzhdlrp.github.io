@@ -39,3 +39,12 @@
     cursor: pointer;
     z-index: 2; 
 }
+#userTap:active {
+    outline: none; 
+    box-shadow: none;
+}
+
+
+#userTap:focus {
+    outline: none; 
+}
