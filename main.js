@@ -1,15 +1,25 @@
 import { Player } from './player.js'
 
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+let animate;
+const ANIMATION_DELAY = 30;
+
 window.addEventListener('load', function() {
     const canvas = document.getElementById("canvas1");
     const ctx = canvas.getContext("2d");
     canvas.width = 400;
     canvas.height = 400;
-    const canvas2 = this.document.getElementById("canvas2");
+
+    const canvas2 = document.getElementById("canvas2");
     const ctx2 = canvas2.getContext("2d");
     canvas2.width = canvas.width;
     canvas2.height = canvas.offsetTop - canvas.height/2 - 5;
-    // canvas2.y = 0;
+
+    const userTap = document.getElementById("userTap");
+    userTap.width = canvas.width;
+    userTap.height = canvas.height;
 
 
     class Game {
@@ -28,18 +38,33 @@ window.addEventListener('load', function() {
 
     const game = new Game(canvas.width, canvas.height);
     console.log(game);
+    game.draw(ctx);
 
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        game.draw(ctx);
-        game.update();
-        requestAnimationFrame(animate);
+    animate = async function() {
+        for (let i = 0; i < 2; i++) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            game.update();
+            game.draw(ctx);
+        
+            await delay(ANIMATION_DELAY);
+        }
+        await delay(ANIMATION_DELAY - 10);
+        for (let i = 0; i < 2; i++) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            game.update();
+            game.update();
+            game.draw(ctx);
+        
+            await delay(ANIMATION_DELAY);
+        }
+        
     }
-    animate();
-
-    function buttonClicked() {
-
-    }
-
+    
+   
 
 });
+
+window.buttonClicked = function buttonClicked() {
+    console.log('tap');
+    animate();
+}
