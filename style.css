@@ -14,7 +14,7 @@
     max-height: 100%;
 }
 #canvas2 {
-    border: 1px solid red;
+    border: 5px solid red;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -22,7 +22,7 @@
 }
 
 .player {
-    display: none;
+    /* display: none; */
 
 }
 
