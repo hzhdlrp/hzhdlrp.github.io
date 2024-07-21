@@ -5,7 +5,7 @@
 }
 
 #canvas1 {
-    border: 2px solid black;
+    border: 1px solid black;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -13,8 +13,27 @@
     max-width: 100%;
     max-height: 100%;
 }
+#canvas2 {
+    border: 1px solid red;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 100%;
+}
 
 .player {
     display: none;
 
+}
+
+#invisibleButton {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px; /* Установите ширину кнопки */
+    height: 50px; /* Установите высоту кнопки */
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10; /* Убедитесь, что кнопка находится выше canvas */
 }

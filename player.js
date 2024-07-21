@@ -16,6 +16,6 @@ export  class Player {
         this.moveIndex %= 3;
     }
     draw(context) {
-        context.drawImage(this.images[this.weightIndex][this.moveIndex], 0, 0, this.sourceWidth, this.sourceHeight, this.x, this.y, this.game.width, this.game.height);
+        context.drawImage(this.images[this.weightIndex][this.moveIndex], 0, 0, this.sourceWidth, this.sourceHeight, this.x, this.y, 400, 400);
     }
 }
