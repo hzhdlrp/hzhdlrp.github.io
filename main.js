@@ -121,10 +121,12 @@ window.addEventListener('load', function() {
 });
 
 window.buttonClicked = function buttonClicked() {
-    progress.score++;
-    progress.energy--;
-    saveProgress();
-    console.log('tap');
-    animate();
+    if (progress.energy > 0) {
+        progress.score++;
+        progress.energy--;
+        saveProgress();
+        console.log('tap');
+        animate();
+    }
 }
 
