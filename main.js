@@ -4,7 +4,7 @@ import { Energy } from './energy.js';
 
 let progress = {
     score: 0,
-    energy: 1000
+    energy: 100
 }
 
 function saveProgress() {
@@ -99,7 +99,7 @@ window.addEventListener('load', function() {
     }
 
     setInterval(() => {
-        if (progress.energy < 1000) {
+        if (progress.energy < 100) {
             progress.energy++;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
