@@ -1,4 +1,5 @@
 import { Player } from './player.js'
+import { Money } from './money.js';
 
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -23,37 +24,40 @@ window.addEventListener('load', function() {
 
 
     class Game {
-        constructor(width, height) {
-            this.width = width;
-            this.height = height;
-            this.player = new Player(this);
+        constructor() {
+            this.player = new Player(canvas);
+            this.money = new Money(canvas2);
         }
         update() {
             this.player.update();
+            this.money.update();
         }
-        draw(context) {
-            this.player.draw(context);
+        draw() {
+            this.money.draw(ctx2);
+            this.player.draw(ctx);
         }
     }
 
-    const game = new Game(canvas.width, canvas.height);
+    const game = new Game();
     console.log(game);
     game.draw(ctx);
 
     animate = async function() {
         for (let i = 0; i < 2; i++) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
             game.update();
-            game.draw(ctx);
+            game.draw();
         
             await delay(ANIMATION_DELAY);
         }
         await delay(ANIMATION_DELAY - 10);
         for (let i = 0; i < 2; i++) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
             game.update();
             game.update();
-            game.draw(ctx);
+            game.draw();
         
             await delay(ANIMATION_DELAY);
         }
