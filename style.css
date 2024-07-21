@@ -41,3 +41,9 @@
     box-shadow: none;
     outline: none; 
 }
+
+#userTap:active {
+    background-color: transparent;
+    box-shadow: none;
+    outline: none; 
+}
