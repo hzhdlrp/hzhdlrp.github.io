@@ -114,7 +114,7 @@ window.addEventListener('load', function() {
             game.draw();
             saveProgress();
         }
-    }, 2000);
+    }, 1000);
     
    
 
