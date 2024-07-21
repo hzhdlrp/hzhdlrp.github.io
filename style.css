@@ -42,8 +42,9 @@
     outline: none; 
 }
 
-#userTap:active {
-    background-color: transparent;
-    box-shadow: none;
+#userTap:active,
+#userTap:focus {
     outline: none; 
+    box-shadow: none; 
+    background-color: transparent; 
 }
