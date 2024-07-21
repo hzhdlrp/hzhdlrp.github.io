@@ -105,6 +105,7 @@ window.addEventListener('load', function() {
             ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
             ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
             game.draw();
+            saveProgress();
         }
     }, 2000);
     
