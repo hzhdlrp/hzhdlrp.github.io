@@ -40,6 +40,13 @@ window.addEventListener('load', function() {
     canvas2.width = canvas.width;
     canvas2.height = canvas.offsetTop - canvas.height/2 - 5;
 
+    const canvas3 = document.getElementById('canvas3');
+    const ctx3 = canvas3.getContext('2d');
+    canvas3.width = canvas.width;
+    canvas3.height = canvas2.height - 10;
+    canvas3.style.marginTop = `${canvas.height + canvas2.height + 10}px`;
+
+
     const userTap = document.getElementById("userTap");
     userTap.width = canvas.width;
     userTap.height = canvas.height;
