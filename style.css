@@ -49,3 +49,10 @@
     box-shadow: none; 
     background-color: transparent; 
 }
+
+.container {
+    display: grid;
+    grid-template-columns: auto auto; /* Две колонки: одна для каждого элемента */
+    align-items: center; /* Вертикальное выравнивание по центру */
+    gap: 10px; /* Отступ между элементами */
+}

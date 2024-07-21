@@ -15,13 +15,18 @@ export class Money {
         this.sizeEnlarger %= 15;
     }
 
-    draw(context) {
+    draw(context, text) {
         let enlarger = this.sizeEnlarger;
         // console.log(this.sizeEnlarger);
 
         context.drawImage(this.image, 0, 0, 
                           this.sourceWidth, this.sourceHeight, this.x - enlarger/2, this.y - enlarger/2, this.width + enlarger, 
                                                                                this.height + enlarger);
+        context.font = '20px Arial';
+        context.fillStyle = 'black';
+        context.textAlign = 'left';
+        context.textBaseline = 'top';
+        context.fillText(text, this.width + 30, this.height/2);
     }
 
 }

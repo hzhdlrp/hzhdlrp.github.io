@@ -1,5 +1,25 @@
-import { Player } from './player.js'
+import { Player } from './player.js';
 import { Money } from './money.js';
+
+let progress = {
+    score: 0,
+    energy: 1000
+}
+
+function saveProgress() {
+    localStorage.setItem('gameProgress', JSON.stringify(progress));
+    console.log('Progress saved');
+}
+
+function loadProgress() {
+    const savedProgress = localStorage.getItem('gameProgress');
+    if (savedProgress) {
+        progress = JSON.parse(savedProgress);
+        console.log('Progress loaded', progress);
+    } else {
+        console.log('No saved progress found');
+    }
+}
 
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -8,6 +28,8 @@ let animate;
 const ANIMATION_DELAY = 30;
 
 window.addEventListener('load', function() {
+    loadProgress();
+    
     const canvas = document.getElementById("canvas1");
     const ctx = canvas.getContext("2d");
     canvas.width = 400;
@@ -33,14 +55,14 @@ window.addEventListener('load', function() {
             this.money.update();
         }
         draw() {
-            this.money.draw(ctx2);
+            this.money.draw(ctx2, progress.score);
             this.player.draw(ctx);
         }
     }
 
     const game = new Game();
     console.log(game);
-    game.draw(ctx);
+    game.draw();
 
     animate = async function() {
         for (let i = 0; i < 2; i++) {
@@ -69,6 +91,14 @@ window.addEventListener('load', function() {
 });
 
 window.buttonClicked = function buttonClicked() {
+    progress.score++;
+    progress.energy--;
+    saveProgress();
     console.log('tap');
     animate();
 }
+
+
+setInterval(() => {
+    progress.energy++;
+}, 1000);
