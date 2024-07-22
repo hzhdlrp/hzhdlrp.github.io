@@ -22,6 +22,32 @@ function loadProgress() {
     }
 }
 
+async function fetchData() {
+    const response = await fetch('http://localhost:3000/data');
+    const data = await response.json();
+    progress.energy = data.data;
+    console.log(`progress energy = ${progress.energy}`);
+}
+
+async function sendData(newData) {
+    try {
+        const response = await fetch('http://localhost:3000/data', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data: newData })
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        console.log(result.message);
+    } catch (error) {
+        console.error('Error sending data:', error);
+    }
+}
+
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -30,6 +56,7 @@ const ANIMATION_DELAY = 30;
 
 window.addEventListener('load', function() {
     loadProgress();
+    fetchData();
     
     const canvas = document.getElementById("canvas1");
     const ctx = canvas.getContext("2d");
@@ -99,21 +126,12 @@ window.addEventListener('load', function() {
     }
 
     setInterval(() => {
-        if (progress.energy < 100) {
-            progress.energy++;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
-            ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
-            game.draw();
-            saveProgress();
-        } else {
-            progress.energy = 100;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
-            ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
-            game.draw();
-            saveProgress();
-        }
+        fetchData();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+        ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
+        game.draw();
+        saveProgress();
     }, 1000);
     
    
@@ -124,6 +142,7 @@ window.buttonClicked = function buttonClicked() {
     if (progress.energy > 2) {
         progress.score++;
         progress.energy-=3;
+        sendData(progress.energy);
         saveProgress();
         console.log('tap');
         animate();
